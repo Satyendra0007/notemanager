@@ -118,7 +118,7 @@ export default function Notes() {
                         <label htmlFor="category" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label>
                         <select id="category" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block max-w-md md:w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" {...register("priority", { required: { value: true, message: "Type is required " } })}>
                           {/* <option >Select Type</option> */}
-                          <option value="Important">Important</option>
+                          <option value="High">High</option>
                           <option value="Medium">Medium</option>
                           <option value="Low">Low</option>
                         </select>
@@ -145,9 +145,16 @@ export default function Notes() {
             <div id="accordion-collapse" data-accordion="collapse">
 
               {notes.length === 0 && <h3 className="text-xl font-semibold text-gray-900 dark:text-white">No New Notes Available</h3>}
-              {notes.length !== 0 && notes.map((note, index) => {
+              {notes.length !== 0 && (notes.filter((note) => note.priority === "High")).map((note, index) => {
                 return <Note key={note._id} index={index + 1} {...note} handleDeleteNote={handleDeleteNote} handleEditNote={handleEditNote} />
               })}
+              {notes.length !== 0 && (notes.filter((note) => note.priority === "Medium")).map((note, index) => {
+                return <Note key={note._id} index={index + 1} {...note} handleDeleteNote={handleDeleteNote} handleEditNote={handleEditNote} />
+              })}
+              {notes.length !== 0 && (notes.filter((note) => note.priority === "Low")).map((note, index) => {
+                return <Note key={note._id} index={index + 1} {...note} handleDeleteNote={handleDeleteNote} handleEditNote={handleEditNote} />
+              })}
+
             </div>
           </div>
         </div>
