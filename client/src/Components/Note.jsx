@@ -3,7 +3,7 @@ import { MdModeEdit } from "react-icons/md";
 import { initFlowbite } from 'flowbite'
 import { useEffect, useState } from "react";
 
-export default function Note({ index, _id, title, priority, description, handleDeleteNote, handleEditNote }) {
+export default function Note({ _id, title, priority, description, handleDeleteNote, handleEditNote }) {
 
   const [data, setData] = useState({
     title: "",
@@ -39,7 +39,7 @@ export default function Note({ index, _id, title, priority, description, handleD
 
   return (
     <>
-      <h2 id={`accordion-collapse-heading-${_id}`}>
+      <h2 className="mt-2" id={`accordion-collapse-heading-${_id}`}>
         <button type="button" className="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-700 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3" data-accordion-target={`#accordion-collapse-body-${_id}`} aria-expanded="true" aria-controls={`accordion-collapse-body-${_id}`}>
           <div className="left">
             <span className="font-bold capitalize">{title}</span>
@@ -50,7 +50,7 @@ export default function Note({ index, _id, title, priority, description, handleD
               <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5 5 1 1 5" />
             </svg>
           </div>
-        </button>.
+        </button>
       </h2>
       <div id={`accordion-collapse-body-${_id}`} className="hidden" aria-labelledby={`accordion-collapse-heading-${_id}`}>
         <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">

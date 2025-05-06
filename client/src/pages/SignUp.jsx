@@ -27,7 +27,7 @@ export default function SignUp() {
       if (serverResponse.ok) {
         saveToLocalStorage(response.token)
         toast.success(response.message)
-        navigate("/notes")
+        Navigate("/notes")
       }
       else {
         toast.warning(response.message)
