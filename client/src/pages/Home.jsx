@@ -17,7 +17,7 @@ export default function Home() {
   }, [])
 
   return (
-    <div className='container mx-auto min-h-[84vh] flex flex-col justify-center items-center '>
+    <div className='container mx-auto min-h-[83vh] md:min-h-[81vh]  flex flex-col justify-center items-center '>
       <div className='md:max-w-3xl m-auto  py-10  '>
         <Logo />
         <div className="paragraph px-1.5  ">

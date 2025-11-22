@@ -14,7 +14,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="message flex justify-center items-center gap-2 font-bold text-sm">
-        Created with <span><FaHeart className='text-rose-600' /></span> by Satyendra
+        Created with <span><FaHeart className='text-rose-600' /></span> by MCA
       </div>
     </footer>
   )

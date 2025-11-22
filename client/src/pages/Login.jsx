@@ -37,7 +37,7 @@ export default function Login() {
   return (
     <>
       {isSubmitting && <Spinner />}
-      <div className='container mx-auto min-h-[84vh] '>
+      <div className='container mx-auto min-h-[83vh] md:min-h-[81vh] '>
         <div className='md:max-w-lg m-auto  py-10 '>
           <Logo />
           <h1 className='font-semibold text-xl md:text-2xl text-center my-5'>Login to your Account</h1>

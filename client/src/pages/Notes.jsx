@@ -12,9 +12,12 @@ export default function Notes() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm()
   const { token, isLoggedIn } = useContext(NoteContext)
   const [notes, setNotes] = useState([])
+  const [search, setSearch] = useState("")
   const [showModal, setShowModal] = useState(false)
   const [loading, setLoading] = useState(true)
   const Navigate = useNavigate()
+  const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(search.toLowerCase()))
+
 
   const fetchAllNotes = async () => {
     setLoading(true)
@@ -85,7 +88,7 @@ export default function Notes() {
   return (
     <div className="">
       {loading && <Spinner />}
-      <div className='container mx-auto min-h-[84vh]' >
+      <div className='container mx-auto min-h-[83vh] md:min-h-[81vh]' >
         <div className='md:max-w-3xl m-auto py-5  '>
           <div className="button px-5">
             <button onClick={() => setShowModal(!showModal)} className="text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-pink-200 dark:focus:ring-pink-800 font-medium rounded-lg text-sm px-10 py-2.5 text-center me-2 mb-2 flex justify-center items-center" type="button">
@@ -141,17 +144,27 @@ export default function Notes() {
           </div>
 
           <div className="notes">
-            <h1 className="text-2xl md:text-3xl font-semibold  my-8 text-center"> Your Notes </h1>
+            <div className="head flex flex-col items-center gap-3 my-6 md:flex-row md:justify-between md:px-2">
+              <h1 className="text-2xl md:text-3xl font-semibold"> Your Notes </h1>
+              <div className="search">
+                <input
+                  className="w-80 py-2.5 px-4 md:py-2 rounded-full outline-none border border-gray-500 shadow-lg" placeholder="Seach Note"
+                  type="text"
+                  name={search}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
+            </div>
             <div id="accordion-collapse" data-accordion="collapse">
-
-              {notes.length === 0 && <h3 className="text-xl font-semibold text-gray-900 dark:text-white">No New Notes Available</h3>}
-              {notes.length !== 0 && (notes.filter((note) => note.priority === "High")).map((note, index) => {
+              {filteredNotes.length === 0 && <h3 className="text-xl text-center my-8 font-semibold text-gray-900 dark:text-white">No Notes Available</h3>}
+              {filteredNotes.length !== 0 && (filteredNotes.filter((note) => note.priority === "High")).map((note, index) => {
                 return <Note key={note._id} index={index + 1} {...note} handleDeleteNote={handleDeleteNote} handleEditNote={handleEditNote} />
               })}
-              {notes.length !== 0 && (notes.filter((note) => note.priority === "Medium")).map((note, index) => {
+              {filteredNotes.length !== 0 && (filteredNotes.filter((note) => note.priority === "Medium")).map((note, index) => {
                 return <Note key={note._id} index={index + 1} {...note} handleDeleteNote={handleDeleteNote} handleEditNote={handleEditNote} />
               })}
-              {notes.length !== 0 && (notes.filter((note) => note.priority === "Low")).map((note, index) => {
+              {filteredNotes.length !== 0 && (filteredNotes.filter((note) => note.priority === "Low")).map((note, index) => {
                 return <Note key={note._id} index={index + 1} {...note} handleDeleteNote={handleDeleteNote} handleEditNote={handleEditNote} />
               })}
 
